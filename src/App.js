@@ -1,38 +1,23 @@
 import React from 'react'
 
-const App = (props) => {
-  const course = "Half Stack application development";
-
-  return (
-    <div>
-      <Header course={course} />
-      <Content />
-      <Total total={10} />
-    </div>
-  );
-};
 
 const Header = (props) => {
   return (
     <div>
+    {/* props.course: tức là truyền data từ bên ngoài vào, có nghĩa là khi khởi tạo, khai báo một component mới phải truyền key à course={} */}
       <h1>{props.course}</h1>
     </div>
   );
 };
 
 const Content = (props) => {
-  const part1 = "Fundamentals of React";
-  const part2 = "Using props to pass data";
-  const part3 = "State of a component";
-  const exercises1 = 10;
-  const exercises2 = 7;
-  const exercises3 = 14;
 
   return (
     <div>
-      <Part part={part1} exercises={exercises1} />
-      <Part part={part2} exercises={exercises2} />
-      <Part part={part3} exercises={exercises3} />
+    {/* props.part: Phải truyền part={} khi tạo một một component Content */}
+      <Part part={props.part[0]} />
+      <Part part={props.part[1]} />
+      <Part part={props.part[2]} />
     </div>
   );
 };
@@ -40,7 +25,8 @@ const Content = (props) => {
 const Part = (props) => {
   return (
     <div>
-      <p>{props.part} {props.exercises}</p>
+    {/* Tuy ở đây mình gọi 2 lần props.part.name và props.part.exercises Nhưng mình chỉ quan tâm đến props. cái gì sau nó để truyền vô thôi, còn phía sau là do dữ liệu của cái được vào mình không quan tâm*/}
+      <p>{props.part.name} {props.part.exercises}</p>
     </div>
   );
 };
@@ -48,10 +34,37 @@ const Part = (props) => {
 const Total = (props) => {
   return (
     <p>
-      Number of Excercises {props.total}
+      Number of Excercises {props.part[0].exercises + props.part[1].exercises + props.part[2].exercises}
     </p>
   );
 };
 
+const App = (props) => {
+  const course = {
+    name: "Half Stack application development",
+    part: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7
+      },
+      {
+        name: "State of a component",
+        exercises: 14
+      },
+    ]
+  };
+
+  return (
+    <div>
+      <Header course={course?.name} />
+      <Content part={course.part}/>
+      <Total part={course.part} />
+    </div>
+  );
+};
 
 export default App;
