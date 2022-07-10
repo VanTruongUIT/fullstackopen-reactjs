@@ -16,15 +16,25 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [allFeedBack, setAllFeedBack] = useState(0);
+
+  const sumFeedBack = () => {
+    return good + neutral + bad;
+  }
 
   const handleSetGoodClick = () => { 
     setGood(good + 1);
+    console.log('call set All FeedBack');
+    setAllFeedBack(sumFeedBack());
+
   }
   const handleSetNeutralClick = () => { 
     setNeutral(neutral + 1);
+    setAllFeedBack(sumFeedBack());
   }
   const handleSetBadClick = () => { 
     setBad(bad + 1);
+    setAllFeedBack(sumFeedBack());
   }
 
   return (
@@ -52,6 +62,9 @@ const App = () => {
       </div>
       <div>
         Bad {bad}
+      </div>
+      <div>
+        All {allFeedBack}
       </div>
     </div>
   );
