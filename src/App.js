@@ -10,59 +10,88 @@ const Button = (props) => {
   );
 };
 
+const StatisticLine = (props) => { 
+  return (
+    <div>
+      {props.text} {props.value}
+    </div>
+  ); 
+};
 
+const Statistic = (props) => { 
+  return (
+    <>
+      <StatisticLine text="Good" value={props.data.good}/>
+      <StatisticLine text="Neutral" value={props.data.neutral}/>
+      <StatisticLine text="Bad" value={props.data.bad}/>
+      <StatisticLine text="All" value={props.data.numberOfFeedBacks}/>
+      <StatisticLine text="Average" value={props.data.average}/>
+      <StatisticLine text="Positive" value={props.data.positive}/>
+    </>
+  );
+};
 
 const App = () => {
 
   // save clicks of each button its own state
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [numberOfFeedBacks, setNumberOfFeedBacks] = useState(0);
-  const [totalPoint, setTotalPoint] = useState(0);
-  const [average, setAverage] = useState(0);
-  const [positive, setPositive] = useState(0);
-
-  const calculateAverage = () => {
-    console.log('totalpoint', totalPoint);
-    console.log('numberOfFeedBacks', numberOfFeedBacks);
-    let average = totalPoint / numberOfFeedBacks;
-    console.log('average', average);
-    return average;
-  };
-
-  const calculatePositive = () => { 
-    return (good + neutral) / numberOfFeedBacks;
-  };
+  const [data, setData] = useState(
+    {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+      numberOfFeedBacks: 0,
+      totalPoint: 0,
+      average: 0,
+      positive: 0,
+    }
+  )
 
   const handleSetGoodClick = () => { 
-    setGood(good + 1);
-    console.log('good', good);
+    const newGood = data.good + 1;
+    const newTotalPoint = data.totalPoint + 1;
+    const newNumberOfFeedBacks = data.numberOfFeedBacks + 1;
 
-    setTotalPoint(totalPoint + 1);
-    console.log('totalPoint', totalPoint);
+    const newData = {
+      ...data,
+      good: newGood,
+      totalPoint: newTotalPoint,
+      numberOfFeedBacks: newNumberOfFeedBacks,
+      average: (newGood - data.bad) / newNumberOfFeedBacks,
+      positive: newGood / newNumberOfFeedBacks,
+    };
 
-    setNumberOfFeedBacks(numberOfFeedBacks + 1);
-    console.log('numberOfFeedBacks', numberOfFeedBacks);
-    console.log('average', (good - bad) / numberOfFeedBacks);
-    setAverage((good - bad) / numberOfFeedBacks);
-    setPositive(calculatePositive());
-
+    setData(newData);
   }
-  const handleSetNeutralClick = () => { 
-    setNeutral(neutral + 1);
-    setNumberOfFeedBacks(numberOfFeedBacks + 1);
-    setAverage(calculateAverage());
-    setPositive(calculatePositive());
+  const handleSetNeutralClick = () => {
 
+    const newNeutral = data.neutral + 1;
+    const newTotalPoint = data.totalPoint + 1;
+    const newNumberOfFeedBacks = data.numberOfFeedBacks + 1;
+
+    const newData = {
+      ...data,
+      neutral: newNeutral,
+      totalPoint: newTotalPoint,
+      numberOfFeedBacks: newNumberOfFeedBacks,
+    };
+
+    setData(newData);
   }
   const handleSetBadClick = () => { 
-    setBad(bad + 1);
-    setTotalPoint(totalPoint - 1);
-    setNumberOfFeedBacks(numberOfFeedBacks + 1);
-    setAverage(calculateAverage());
-    setPositive(calculatePositive());
+    const newBad = data.bad + 1;
+    const newTotalPoint = data.totalPoint - 1;
+    const newNumberOfFeedBacks = data.numberOfFeedBacks + 1;
 
+    const newData = {
+      ...data,
+      bad: newBad,
+      totalPoint: newTotalPoint,
+      numberOfFeedBacks: newNumberOfFeedBacks,
+      average: (data.good - newBad) / newNumberOfFeedBacks,
+      positive: data.good / newNumberOfFeedBacks,
+    };
+
+    setData(newData);
   }
 
   return (
@@ -82,24 +111,13 @@ const App = () => {
       />
 
       <h3>Statistics</h3>
-      <div>
-        Good {good}
-      </div>
-      <div>
-        Neutral {neutral}
-      </div>
-      <div>
-        Bad {bad}
-      </div>
-      <div>
-        All {numberOfFeedBacks}
-      </div>
-      <div>
-        Average {average}
-      </div>
-      <div>
-        Positive {positive}
-      </div>
+      {data.numberOfFeedBacks !== 0 && 
+        <Statistic data={data}/>
+      }
+
+      {data.numberOfFeedBacks === 0 && 
+        <p>No feedback given!</p>
+      }
 
     </div>
   );
