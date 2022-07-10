@@ -1,56 +1,58 @@
 import React from 'react'
 import { useState } from 'react';
 
-const Display = (props) => {
-  return (
-    <div>{props.counter}</div>
-  );
-};
 
 const Button = (props) => {
   return (
-    <div>
-      <button onClick={props.onClick}>{props.text}</button>
-    </div>
+    <button onClick={props.onClick}>
+      {props.text}
+    </button>
   );
 };
 
-const App = (props) => {
-  const [counter, setCounter] = useState(0);
+const App = () => {
 
-  const handleClickPlusCounter = () => {
-    console.log("Plus!!!");
-    setCounter(counter + 1);
-  };
+  // save clicks of each button its own state
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  const handleClickMinusCounter = () => {
-    console.log("Plus!!!");
-    setCounter(counter - 1);
-  };
+  const handleSetGoodClick = () => { 
+    setGood(good + 1);
+  }
+  const handleSetNeutralClick = () => { 
+    setNeutral(neutral + 1);
+  }
+  const handleSetBadClick = () => { 
+    setBad(bad + 1);
+  }
 
-  const handleClickResetCounter = () => {
-    console.log("Reset to 0");
-    setCounter(0);
-  };
-
-
-  
   return (
     <div>
-      <Display counter={counter}/>
+      <h3>Give feedback</h3>
       <Button 
-        onClick={handleClickPlusCounter}
-        text="Plus"
+        onClick={handleSetGoodClick}
+        text="Good"
       />
       <Button 
-        onClick={handleClickMinusCounter}
-        text="Minus"
+        onClick={handleSetNeutralClick}
+        text="Neutral"
       />
       <Button 
-        onClick={handleClickResetCounter}
-        text="Reset to zero"
+        onClick={handleSetBadClick}
+        text="Bad"
       />
 
+      <h3>Statistics</h3>
+      <div>
+        Good {good}
+      </div>
+      <div>
+        Neutral {neutral}
+      </div>
+      <div>
+        Bad {bad}
+      </div>
     </div>
   );
 };
