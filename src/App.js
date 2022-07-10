@@ -25,22 +25,24 @@ const StatisticLine = (props) => {
 
 const Statistic = (props) => { 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Measure</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <StatisticLine text="Good" value={props.data.good}/>
-        <StatisticLine text="Neutral" value={props.data.neutral}/>
-        <StatisticLine text="Bad" value={props.data.bad}/>
-        <StatisticLine text="All" value={props.data.numberOfFeedBacks}/>
-        <StatisticLine text="Average" value={props.data.average}/>
-        <StatisticLine text="Positive" value={props.data.positive + " %"} />
-      </tbody>
-    </table>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <StatisticLine text="Good" value={props.data.good}/>
+          <StatisticLine text="Neutral" value={props.data.neutral}/>
+          <StatisticLine text="Bad" value={props.data.bad}/>
+          <StatisticLine text="All" value={props.data.numberOfFeedBacks}/>
+          <StatisticLine text="Average" value={props.data.average}/>
+          <StatisticLine text="Positive" value={props.data.positive + " %"} />
+        </tbody>
+      </table>
+    </div>
   );
 };
 
