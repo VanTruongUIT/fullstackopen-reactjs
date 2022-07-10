@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Note = ({note}) => {
+const Part = ({note}) => {
   return (
     <div 
       style={{margin: "10px 0px"}}
@@ -10,4 +10,4 @@ const Note = ({note}) => {
   );
 };
 
-export default Note;
+export default Part;

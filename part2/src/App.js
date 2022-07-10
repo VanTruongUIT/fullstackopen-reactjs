@@ -1,5 +1,4 @@
 import Course from "./components/Course";
-import Note from "./components/Note";
 
 function App() {
   const courses = [
@@ -47,29 +46,10 @@ function App() {
     }
   ];
 
-  const totalExercises = (course) => {
-    const exercises = [];
-    for (const item of course.parts) {
-      exercises.push(item.exercises);
-    }
-    return exercises.reduce((previous, current) => previous + current);
-  }
-
   return (
-    <div>
-      {
-        courses.map(course => {
-          const total = totalExercises(course);
-          return (
-            <div key={course.id}>
-              <h1>{course.name}</h1>
-              <Course course={course.parts} />
-              <p>Total of {total} exercises</p>
-            </div>
-          );
-        }) 
-      }
-    </div>
+    courses.map(course => {
+      return <Course key={course.id} course={course}/>
+    })
   );
 }
 
