@@ -12,22 +12,35 @@ const Button = (props) => {
 
 const StatisticLine = (props) => { 
   return (
-    <div>
-      {props.text} {props.value}
-    </div>
+    <tr>
+      <td>
+        {props.text}
+      </td>
+      <td>
+        {props.value}
+      </td>
+    </tr>
   ); 
 };
 
 const Statistic = (props) => { 
   return (
-    <>
-      <StatisticLine text="Good" value={props.data.good}/>
-      <StatisticLine text="Neutral" value={props.data.neutral}/>
-      <StatisticLine text="Bad" value={props.data.bad}/>
-      <StatisticLine text="All" value={props.data.numberOfFeedBacks}/>
-      <StatisticLine text="Average" value={props.data.average}/>
-      <StatisticLine text="Positive" value={props.data.positive}/>
-    </>
+    <table>
+      <thead>
+        <tr>
+          <th>Measure</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <StatisticLine text="Good" value={props.data.good}/>
+        <StatisticLine text="Neutral" value={props.data.neutral}/>
+        <StatisticLine text="Bad" value={props.data.bad}/>
+        <StatisticLine text="All" value={props.data.numberOfFeedBacks}/>
+        <StatisticLine text="Average" value={props.data.average}/>
+        <StatisticLine text="Positive" value={props.data.positive}/>
+      </tbody>
+    </table>
   );
 };
 
