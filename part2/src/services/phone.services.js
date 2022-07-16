@@ -24,9 +24,17 @@ const getAll = () => {
 const deletePhoneObjById = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`);
   return request.then(response => {
-    console.log(`delete successfully phonebook`)
+    console.log(`delete successfully phonebook`);
     return response.data;
   });
 }
 
-export default {create, getAll, deletePhoneObjById};
+const updatePhone = (id, newPhone) => {
+  const request = axios.put(`${baseUrl}/${id}`, newPhone);
+  return request.then(response => {
+    console.log(`update phonebook successfully`);
+    return response.data;
+  })
+}
+
+export default {create, getAll, deletePhoneObjById, updatePhone};

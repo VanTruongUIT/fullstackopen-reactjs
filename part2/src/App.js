@@ -21,10 +21,18 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = {name: newName, number: newNumber};
+    const filterd_persons = persons.filter(person => person.name === newName);
+    const data = filterd_persons[0];
+    const updatedPerson = {...data, number: newNumber};
 
-    if (isPersonExists(data) === true) {
-      alert(`${data.name} is already added to phonebook`)
+    if (filterd_persons.length !== 0) {
+      if (window.confirm(`${data.name} is already added to the phonebook, replace the old number with a new one ?`)) {
+        services.updatePhone(updatedPerson.id, updatedPerson)
+          .then(returnedPerson => {
+            console.log(`${returnedPerson} updated phonenumber successfully`);
+            setPersons(persons.map(person => person.id !== data.id ? person : returnedPerson))
+          })
+      }
     } else {
       services
         .create(data)
@@ -45,15 +53,6 @@ function App() {
     setNewNumber(event.target.value);
   };
 
-  const isPersonExists = (person) => {
-
-    for (const item of persons) {
-      if (item.name === person.name) {
-        return true;
-      }
-    }
-    return false;
-  };
 
   const handleOnChangeSearchName = (event) => {
     const query = event.target.value;
