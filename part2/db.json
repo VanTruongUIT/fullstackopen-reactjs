@@ -1,0 +1,24 @@
+{
+  "phones": [
+    {
+      "id": 1,
+      "name": "Truong",
+      "number": "0123456789"
+    },
+    {
+      "id": 2,
+      "name": "Lan Anh",
+      "number": "0123456789"
+    },
+    {
+      "id": 3,
+      "name": "Huu Phuc",
+      "number": "0123456789"
+    },
+    {
+      "name": "Thinh",
+      "number": "0198274198",
+      "id": 4
+    }
+  ]
+}
