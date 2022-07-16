@@ -5,12 +5,17 @@ const baseUrl = "http://localhost:3001/phones";
 
 
 const create = (phoneObj) => {
+  console.log(`phone object: ${phoneObj}`);
   // axios.post() => return a new promise, so now request variable is the promise instance
   const request = axios.post(baseUrl, phoneObj);
 
   // request.then -> to get data from promise return. to get data from promise return we .data.
   // but this is also the promise again. So, when the place that call create function -> this need to .then() function to get the data of post request.
-  return request.then(response => response.data);
+  
+  return request.then(response => {
+    console.log(`create new phone: ${response.data.name} ${response.data.number}`);
+    return response.data;
+  });
 };
 
 const getAll = () => {
