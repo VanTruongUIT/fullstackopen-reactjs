@@ -21,4 +21,12 @@ const getAll = () => {
   });
 }
 
-export default {create, getAll};
+const deletePhoneObjById = (id) => {
+  const request = axios.delete(`${baseUrl}/${id}`);
+  return request.then(response => {
+    console.log(`delete successfully phonebook`)
+    return response.data;
+  });
+}
+
+export default {create, getAll, deletePhoneObjById};

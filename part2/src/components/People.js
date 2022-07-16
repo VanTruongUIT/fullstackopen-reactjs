@@ -1,14 +1,15 @@
 import React from 'react';
 import Person from './Person';
 
-const People = (props) => {
+const People = ({people, handleOnClickDelete}) => {
+  console.log(`people length: ${people.length}`);
   return (
     <div>
-      {props.people.map(person => 
+      {people.map((person, i) => 
         (<Person 
-          key={person.name} 
-          name={person.name} 
-          number={person.number}
+          key={i} 
+          person={person}
+          handleOnClickDelete={handleOnClickDelete}
         />)
         )
       }

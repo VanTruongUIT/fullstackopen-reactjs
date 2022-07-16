@@ -1,11 +1,6 @@
 {
   "phones": [
     {
-      "id": 1,
-      "name": "Truong",
-      "number": "0123456789"
-    },
-    {
       "id": 2,
       "name": "Lan Anh",
       "number": "0123456789"

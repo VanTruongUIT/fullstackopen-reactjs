@@ -63,6 +63,22 @@ function App() {
     setSearchResult(queryResult);
   };
 
+  const handleOnClickDelete = (id) => {
+    // get the person who will be deleted
+    const filteredPerson = persons.filter(person => person.id === id);
+
+    const personName = filteredPerson[0].name;
+    const personId = filteredPerson[0].id;
+
+    // handle delete person in backend services
+    if (window.confirm(`Delete ${personName}?`)) {
+      services.deletePhoneObjById(personId);
+      console.log(`${personName} was deleted successfully!`);
+
+      setPersons(persons.filter(person => person.id !== personId));
+    }
+
+  }
   return (
     <div>
       <h2>PhoneBook</h2>
@@ -83,7 +99,10 @@ function App() {
 
       <h2>Numbers</h2>
       <div>
-        <People people={persons}/>
+        <People 
+          people={persons} 
+          handleOnClickDelete={handleOnClickDelete}
+        />
       </div>
 
     </div>
